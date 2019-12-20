@@ -1,6 +1,6 @@
 function onOpen() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet();
-  var entries = [{
+  var refresh_entries = [{
     name : "Refresh Member Related Data",
     functionName : "refreshLastUpdate"
   },{
@@ -9,7 +9,14 @@ function onOpen() {
   },{
     name : "Refresh Planning Tasks",
     functionName : "refreshPlanningTasks"
-  },{
+  }
+//TODO: bug, reference cell become #REFERR
+//  ,{
+//    name : "Refresh Current Cell",
+//    functionName : "refreshCurrentCellFormula"
+//  }
+  ];
+  var gen_entries = [{
     name : "Gen Planning Panels",
     functionName : "genPlanningPanelsBySelection"
   },{
@@ -21,14 +28,9 @@ function onOpen() {
   },{
     name : "Gen Static Planning Panels From Jira",
     functionName : "genStaticPlanningPanelsFromJiraCurrentSprint"
-  }
-//TODO: bug, reference cell become #REFERR
-//  ,{
-//    name : "Refresh Current Cell",
-//    functionName : "refreshCurrentCellFormula"
-//  }
-  ];
-  sheet.addMenu("Refresh", entries);
+  }];
+  sheet.addMenu("Refresh", refresh_entries);
+  sheet.addMenu("Generate", gen_entries);
 };
 
 function refreshCurrentCellFormula() {
